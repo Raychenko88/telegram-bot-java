@@ -1,4 +1,17 @@
 package org.repo;
 
-public interface UserRepository {
+import org.example.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+import static org.hibernate.loader.Loader.SELECT;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    @Query("SELECT u FROM User u WHERE u.notified = false AND u.phone IS NOT NULL AND u.email IS NOT NULL")
+    List<User> findNewUsers();
+
+    User findByChatId(Long id);
 }
