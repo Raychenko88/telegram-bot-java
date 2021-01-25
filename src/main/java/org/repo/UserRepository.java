@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-import static org.hibernate.loader.Loader.SELECT;
-
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.notified = false AND u.phone IS NOT NULL AND u.email IS NOT NULL")
